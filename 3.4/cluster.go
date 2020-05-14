@@ -312,6 +312,8 @@ func (c *Cluster) getTopo(p Client) (ClusterTopo, error) {
 	fmt.Println("MADHUKANT_1:getTopo:")
 	var tt ClusterTopo
 	err := p.Do(Cmd(&tt, "CLUSTER", "SLOTS"))
+	fmt.Println("MADHUKANT_1:getTopo_tt:", tt)
+	fmt.Println("MADHUKANT_1:getTopo_tt:", err)
 	return tt, err
 }
 
@@ -388,8 +390,9 @@ func (c *Cluster) traceTopoChanged(prevTopo ClusterTopo, newTopo ClusterTopo) {
 // while this method is normally deduplicated by the Sync method's use of
 // dedupe it is perfectly thread-safe on its own and can be used whenever.
 func (c *Cluster) sync(p Client) error {
-	fmt.Println("MADHUKANT_1:sync:", p)
+	fmt.Printf("MADHUKANT_1:sync:%+v:\n", p)
 	tt, err := c.getTopo(p)
+	fmt.Println("MADHUKANT_sync_getTopo_err:", err)
 	if err != nil {
 		return err
 	}
@@ -412,6 +415,7 @@ func (c *Cluster) sync(p Client) error {
 
 	tm := tt.Map()
 	fmt.Println("MADHUKANT_1_sync_c.pools", c.pools)
+	fmt.Printf("MADHUKANT_1_sync_tt:%+v:\n", tt)
 	fmt.Println("MADHUKANT_1_sync_tm", tm)
 	for addr, p := range c.pools {
 		if _, ok := tm[addr]; !ok {
@@ -425,7 +429,7 @@ func (c *Cluster) sync(p Client) error {
 }
 
 func (c *Cluster) syncEvery(d time.Duration) {
-	fmt.Println("MADHUKANT_1:syncEvery:")
+	fmt.Printf("MADHUKANT_1:syncEvery:%+v\n:", d)
 	c.closeWG.Add(1)
 	go func() {
 		defer c.closeWG.Done()
