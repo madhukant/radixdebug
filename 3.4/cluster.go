@@ -314,9 +314,9 @@ func (c *Cluster) getTopo(p Client) (ClusterTopo, error) {
 	err := p.Do(Cmd(&tt, "CLUSTER", "SLOTS"))
 	fmt.Println("MADHUKANT_1:getTopo_tt_1:", tt)
 	fmt.Println("MADHUKANT_1:getTopo_tt_2:", err)
-	fmt.Printf("MADHUKANT_1:getTopo_tt_3:%+v:", tt)
-	fmt.Printf("MADHUKANT_1:getTopo_tt_3:%+T:", tt)
-	fmt.Printf("MADHUKANT_1:getTopo_tt_4:%d:", len(tt))
+	fmt.Printf("MADHUKANT_1:getTopo_tt_3:%+v:\n", tt)
+	fmt.Printf("MADHUKANT_1:getTopo_tt_3:%+T:\n", tt)
+	fmt.Printf("MADHUKANT_1:getTopo_tt_4:%d:\n", len(tt))
 
 	if tt == nil && err == nil {
 		err = errors.New("No Topo Available by madhukant")
