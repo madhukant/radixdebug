@@ -318,7 +318,7 @@ func (c *Cluster) getTopo(p Client) (ClusterTopo, error) {
 	fmt.Printf("MADHUKANT_1:getTopo_tt_3:%+T:", tt)
 	fmt.Printf("MADHUKANT_1:getTopo_tt_4:%d:", len(tt))
 
-	if tt == ttNil && err == nil {
+	if tt == nil && err == nil {
 		err = errors.New("No Topo Available by madhukant")
 	}
 	return tt, err
