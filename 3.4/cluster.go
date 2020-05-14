@@ -310,7 +310,7 @@ func (c *Cluster) Topo() ClusterTopo {
 
 func (c *Cluster) getTopo(p Client) (ClusterTopo, error) {
 	fmt.Println("MADHUKANT_1:getTopo:")
-	var tt ClusterTopo
+	var tt, ttNil ClusterTopo
 	err := p.Do(Cmd(&tt, "CLUSTER", "SLOTS"))
 	fmt.Println("MADHUKANT_1:getTopo_tt_1:", tt)
 	fmt.Println("MADHUKANT_1:getTopo_tt_2:", err)
@@ -318,7 +318,7 @@ func (c *Cluster) getTopo(p Client) (ClusterTopo, error) {
 	fmt.Printf("MADHUKANT_1:getTopo_tt_3:%+T:", tt)
 	fmt.Printf("MADHUKANT_1:getTopo_tt_4:%d:", len(tt))
 
-	if tt == ClusterTopo{} && err == nil {
+	if tt == ttNil && err == nil {
 		err = errors.New("No Topo Available by madhukant")
 	}
 	return tt, err
