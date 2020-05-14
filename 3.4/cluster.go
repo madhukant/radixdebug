@@ -310,7 +310,7 @@ func (c *Cluster) Topo() ClusterTopo {
 
 func (c *Cluster) getTopo(p Client) (ClusterTopo, error) {
 	fmt.Println("MADHUKANT_1:getTopo:")
-	var tt, ttNil ClusterTopo
+	var tt ClusterTopo
 	err := p.Do(Cmd(&tt, "CLUSTER", "SLOTS"))
 	fmt.Println("MADHUKANT_1:getTopo_tt_1:", tt)
 	fmt.Println("MADHUKANT_1:getTopo_tt_2:", err)
